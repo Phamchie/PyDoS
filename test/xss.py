@@ -10,12 +10,24 @@ url = input("url : ")
 
 request = requests.get(url)
 
-data_send = '<h1>Checked By Chien</h1>'
+if request.status_code == 200:
 
-data = {"search": data_send, "Search": data_send}
-request = requests.post(url, data=data)
+    inputs = {"search", "q", "query", "Search"}
 
-if request.status_code == "Checked By Chien" not in request_http.text:
-    print(f"[*] {url} May Be Vulnerable")
+    payloads_attack = ['<h1>Cheked XSS By Chien</h1>']
+
+
+    for params in inputs:
+
+        for payload in payloads_attack:
+
+            data_send = {params: payload}
+            request = requests.post(url, data_send=data_send)
+
+            if payload in request.text:
+                print(f"[+] {url} May Be Vulnerable")
+            else:
+                print(f"[-] {url} Not Vulnerable")
+
 else:
-    print(f"[x] {url} Not Vulnerable ")
+    print(f"{url} not response ")
