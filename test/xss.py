@@ -6,28 +6,21 @@ print("")
 print("XSS")
 print("")
 
-url = input("url : ")
+url = input("Nhập URL: ")
 
-request = requests.get(url)
+response = requests.get(url)
 
-if request.status_code == 200:
-
-    inputs = {"search", "q", "query", "Search"}
-
-    payloads_attack = ['<h1>Cheked XSS By Chien</h1>']
-
-
-    for params in inputs:
-
-        for payload in payloads_attack:
-
-            data_send = {params: payload}
-            request = requests.post(url, data_send=data_send)
-
-            if payload in request.text:
-                print(f"[+] {url} May Be Vulnerable")
-            else:
-                print(f"[-] {url} Not Vulnerable")
-
+if response.status_code == 200:
+    inputs = ["search", "q", "query"]
+    
+    payloads = ['<script>alert("XSS")</script>', '<img src=x onerror=alert("XSS")>']
+    
+    for param in inputs:
+        for payload in payloads:
+            data = {param: payload}
+            response = requests.post(url, data=data)
+            
+            if payload in response.text:
+                print(f"[+] {param} is vulnerable to XSS")
 else:
-    print(f"{url} not response ")
+    print("[-] The website is not available")
